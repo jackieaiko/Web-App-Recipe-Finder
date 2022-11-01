@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+
+    <style>
+        .title {
+            background-color: rgb(255, 252, 90);
+            max-width: 930px;
+            padding: 5px;
+        }
+
+        .user-name {
+            background-color: rgb(211, 242, 249);
+            max-width: 930px;
+            padding: 5px;
+        }
+
+        .saved-recipes {
+            background-color: rgb(211, 225, 249);
+            max-width: 930px;
+            padding: 5px;
+        }
+        
+    </style>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", domLoaded);
+        function domLoaded() {
+
+
+            let FirstNameElement = document.getElementById("fname");
+            let LastNameElement = document.getElementById("lname");
+
+            let fnameBtnElement = document.getElementById("saveBtnf");
+            let lnameBtnElement = document.getElementById("saveBtnl");
+
+
+            // if(localStorage.getItem("fname")) {
+            //     FirstNameElement.innerText = localStorage.getItem("fname");
+            // }
+
+            // saves value of first name
+            // fnameBtnElement.addEventListener("click", () => {
+            //     if(FirstNameElement.value.length > 0) {
+            //         localStorage.setItem("fname", FirstNameElement.value);
+            //         FirstNameElement.innerText = FirstNameElement.value;
+            //     }
+            // });
+
+            // // saves value of last name
+            // lnameBtnElement.addEventListener("click", () => {
+            //     if(LastNameElement.value.length > 0) {
+            //         localStorage.setItem("lname", LastNameElement.value);
+            //     }
+            // });
+
+
+        }
+    </script>
+</head>
+
+<body>
+    <div class="title">
+        <h1>Your Profile</h1>
+    </div>
+
+    <div class="user-name">
+            <label>First Name:
+                <input type="text" id="fname" name="fname">
+                <input type="button" value="Save Data" id="saveBtnf">
+            </label> 
+        <p></p>
+            <label>Last Name:
+                <input type="text" id="lname" name="lname">
+                <input type="button" value="Save Data" id="saveBtnl">
+            </label>
+    </div>
+
+    <div class="saved-recipes">
+        <h2>Saved Recipes</h2>
+    </div>
+
+    <a href="index.html">Back to Home Page</a>
+</body>
+</html>

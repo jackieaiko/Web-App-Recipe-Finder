@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Page</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+     crossorigin="anonymous"></script>
+
+    <style>
+        .title {
+            background-color: rgb(255, 252, 90);
+            max-width: 930px;
+            padding: 5px;
+        }
+
+        .recipe-description {
+            background-color: rgb(211, 242, 249);
+            max-width: 930px;
+            padding: 5px;
+        }
+
+        .recipe-ingredients {
+            background-color: rgb(211, 225, 249);
+            max-width: 930px;
+            padding: 5px;
+        }
+
+        .recipe-steps {
+            background-color: rgb(211, 242, 249);
+            max-width: 930px;
+            padding: 5px;
+        }
+        .user-ratings {
+            background-color: rgb(211, 225, 249);
+            max-width: 930px;
+            padding: 5px;
+        }
+
+        img {
+            width: 500px;
+            height: 650px;
+            position: relative;
+            left: 200px; 
+            border-color: black; 
+            border-width: 1px;
+            border-style: inset;
+            margin: 6px;
+        }
+    </style>
+    <script>
+        const recipes = [
+            {
+                recipeName: 'Pork Buns',
+                recipeurl: 'recipe_images/pork_bun.jpg',
+                decription: 'this is a delicous bun of meat that is steamed and warmed',
+                ingredients: ['pork', 'dough', 'salt'],
+                steps: ['move batter', 'make rice'], 
+                likes: 0,
+                comments: []
+            },
+            {
+                recipeName: 'fried rice',
+                recipeurl: 'fried-rice.jpg',
+                decription: 'this a dish made with rice and left over meats',
+                ingredients: ['rice', 'egg', 'peas'],
+                steps: ['make eggs', 'make rice'], 
+                likes: 0,
+                comments: []
+            },
+            {
+                recipeName: 'chicken sandwich',
+                recipeurl: 'chicken-sandwich.jpg',
+                decription: 'this is sandwich containing gravy and chicken',
+                ingredients: ['gravy', 'chicken', 'biscuit'],
+                steps: ['fry chicken', 'make gravy'], 
+                likes: 0,
+                comments: []
+            }
+        ];
+    </script>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", domLoaded);
+        function domLoaded() {
+
+            let RecipeNameElement = document.getElementById("recipe-name");
+            let DescriptionNameElement = document.getElementById("description");
+
+            let IngredientsElement = document.getElementById("ingredients");
+
+            RecipeNameElement.innerHTML = recipes[0].recipeName;
+            DescriptionNameElement.innerHTML = recipes[0].decription;
+
+            $("img").attr("src", recipes[0].recipeurl)
+
+            for(let i = 0; i < recipes[0].ingredients.length; i++) {
+                $("ul").append("<li>" + recipes[0].ingredients[i] + "</li>");
+            }
+
+            for(let i = 0; i < recipes[0].steps.length; i++) {
+                $("ol").append("<li>" + recipes[0].steps[i] + "</li>");
+            }
+
+            
+        }
+    </script>
+
+</head>
+<body>
+        <div class="title">
+            <h1 id="recipe-name"></h1>
+            <img id="pic">
+        </div>
+    
+        <div class="recipe-description">
+            <p id="description"></p>
+        </div>
+    
+        <div class="recipe-ingredients">
+            Ingredients
+            <ul></ul>
+        </div>
+    
+        <div class="recipe-steps">
+            Steps
+            <ol></ol>
+        </div>
+    
+        <div class="user-ratings">
+            like
+            comment 
+        </div>
+
+
+    
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+    <script src="recipe.js"></script>
+
+</body>
+
+</html>

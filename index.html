@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
 
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+     crossorigin="anonymous"></script>
+
     <style>
         .intro {
             background-color: rgb(255, 252, 90);
@@ -44,9 +48,6 @@
             border-radius: 15px;
         }
 
-        .profile {
-            margin: 10px;
-        }
         .description {
             margin: 10px;
         }
@@ -69,10 +70,21 @@
         .search-recipe {
             position: fixed;
             top: 32px; 
-            right: 210px;
+            right: 350px;
         }
-
     </style>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", domLoaded);
+        function domLoaded() {
+
+            let ProfileBtnElement = document.getElementById("profile-btn");
+
+            
+
+        }
+    </script>
+    
 </head>
 <body>
     <div class="intro">
@@ -88,6 +100,10 @@
         <div class="profile">
             <h3>Profile</h3>
             <img src="/recipe_images/profile_pic.jpg" alt="profile" id="profile-pic">
+
+            <form action="profile.html" method="post" id="form">
+                <input type="submit" value="Click to Edit Profile" id="profile-btn">
+            </form>
         </div>
 
         <div class="description">
