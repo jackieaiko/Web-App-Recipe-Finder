@@ -87,6 +87,7 @@
     <script>
         window.addEventListener("DOMContentLoaded", domLoaded);
         function domLoaded() {
+            let recipeNum = localStorage.get("recipeNum");
 
             let RecipeNameElement = document.getElementById("recipe-name");
             let DescriptionNameElement = document.getElementById("description");
@@ -144,6 +145,8 @@
 
     <script src="recipe.js"></script>
 
+
+    <a href="index.html">Back to Home Page</a>
 </body>
 
 </html>

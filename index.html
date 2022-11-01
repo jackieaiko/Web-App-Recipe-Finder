@@ -30,7 +30,16 @@
             padding: 5px;
         }
         
-        img {
+        #img1, #img2 {
+            width: 200px;
+            height: 250px;
+            border-color: black;
+            border-width: 6px;
+            border-style: inset;
+            border-radius: 15px;
+            margin: 6px;
+        }
+        #img3, #img4 {
             width: 200px;
             height: 250px;
             border-color: black;
@@ -66,6 +75,9 @@
             position: relative;
             left: 390px;
         }
+        .forms {
+            display: flex;
+        }
 
         .search-recipe {
             position: fixed;
@@ -78,8 +90,27 @@
         window.addEventListener("DOMContentLoaded", domLoaded);
         function domLoaded() {
 
-            let ProfileBtnElement = document.getElementById("profile-btn");
+            // for explore feature store value of which picture was clicked
+            localStorage.clear();
+            function RecipePage1() {
+                localStorage.setItem("recipeNum", "1");
+            }
+            document.getElementById("form1").addEventListener("submit", RecipePage1);
 
+            function RecipePage2() {
+                localStorage.setItem("recipeNum", "2");
+            }
+            document.getElementById("form2").addEventListener("submit", RecipePage2);
+
+            function RecipePage3() {
+                localStorage.setItem("recipeNum", "3");
+            }
+            document.getElementById("form3").addEventListener("submit", RecipePage3);
+
+            function RecipePage4() {
+                localStorage.setItem("recipeNum", "4");
+            }
+            document.getElementById("form4").addEventListener("submit", RecipePage4);
             
 
         }
@@ -121,10 +152,21 @@
 
     <div class="suggested">
         <h3>Explore Suggested</h3>
-        <img src="/recipe_images/pork_rib.jpg" alt="recipe">
-        <img src="/recipe_images/fried_rice.jpg" alt="recipe">
-        <img src="/recipe_images/shwarma_fries.jpg" alt="recipe">
-        <img src="/recipe_images/biscuit_chicken.jpg" alt="recipe">
+        <div class="forms">
+            <form action="recipe.html" method="post" id="form1">
+                <input type="image" src="/recipe_images/pork_rib.jpg" alt="recipe" id="img1">
+            </form>
+            <form action="recipe.html" method="post" id="form2">
+                <input type="image" src="/recipe_images/fried_rice.jpg" alt="recipe" id="img2">
+            </form>
+            <form action="recipe.html" method="post" id="form3">
+                <input type="image" src="/recipe_images/shwarma_fries.jpg" alt="recipe" id="img3">
+            </form>
+                <form action="recipe.html" method="post" id="form4">
+                <input type="image" src="/recipe_images/biscuit_chicken.jpg" alt="recipe" id="img4">
+            </form>
+        </div>
+
     </div>
 
 
