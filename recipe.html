@@ -41,7 +41,7 @@
             padding: 5px;
         }
 
-        img {
+        #pic {
             width: 500px;
             height: 650px;
             position: relative;
@@ -49,6 +49,16 @@
             border-color: black; 
             border-width: 1px;
             border-style: inset;
+            margin: 6px;
+        }
+
+        img {
+            width: 200px;
+            height: 250px;
+            border-color: black;
+            border-width: 6px;
+            border-style: inset;
+            border-radius: 15px;
             margin: 6px;
         }
     </style>
@@ -178,6 +188,7 @@
             let LikesElement = document.getElementById("likes");
             let CommentElement = document.getElementById("comments");
             let CommentInputElement = document.getElementById("comment");
+            let PhotoInputElement = document.getElementById("upload-photo");
 
             RecipeNameElement.innerHTML = recipes[recipeNum].recipeName;
             DescriptionNameElement.innerHTML = recipes[recipeNum].decription;
@@ -202,6 +213,12 @@
                 $("#comments").append("<p>" + CommentInputElement.value + "</p>");
             }
             document.getElementById("comment-btn").addEventListener("click", addComment);
+
+            function uploadPhoto() {
+                $("#photo-upload").append("<img src='" + PhotoInputElement.value + "'>");
+                PhotoInputElement.value = "";
+            }
+            document.getElementById("uphoto-btn").addEventListener("click", uploadPhoto);
         }
     </script>
 
@@ -227,15 +244,25 @@
         </div>
     
         <div class="user-ratings">
+            <h4>Like</h4>
             <input type="button" value="Like" id="like-btn">
             <u id="likes">
                 0
             </u>
-
+            
             <div id="comments">
+                <h4>Comment</h4>
                 <input type="text" id="comment" name="comment">
                 <input type="button" id="comment-btn" value="upload"> 
             </div>
+
+            <div id="photo-upload">
+                <h4>Upload Photos</h4>
+                <input type="text" id="upload-photo" name="upload-photo" placeholder="url">
+                <input type="button" id="uphoto-btn" value="upload"> 
+            </div>
+
+
         </div>
 
 
