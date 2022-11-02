@@ -176,6 +176,8 @@
             let IngredientsElement = document.getElementById("ingredients");
 
             let LikesElement = document.getElementById("likes");
+            let CommentElement = document.getElementById("comments");
+            let CommentInputElement = document.getElementById("comment");
 
             RecipeNameElement.innerHTML = recipes[recipeNum].recipeName;
             DescriptionNameElement.innerHTML = recipes[recipeNum].decription;
@@ -195,6 +197,11 @@
             }
             document.getElementById("like-btn").addEventListener("click", updateLikes);
 
+
+            function addComment() {
+                $("#comments").append("<p>" + CommentInputElement.value + "</p>");
+            }
+            document.getElementById("comment-btn").addEventListener("click", addComment);
         }
     </script>
 
@@ -221,10 +228,14 @@
     
         <div class="user-ratings">
             <input type="button" value="Like" id="like-btn">
-            <div id="likes">
+            <u id="likes">
                 0
+            </u>
+
+            <div id="comments">
+                <input type="text" id="comment" name="comment">
+                <input type="button" id="comment-btn" value="upload"> 
             </div>
-                
         </div>
 
 
