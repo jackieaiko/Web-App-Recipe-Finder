@@ -175,6 +175,8 @@
 
             let IngredientsElement = document.getElementById("ingredients");
 
+            let LikesElement = document.getElementById("likes");
+
             RecipeNameElement.innerHTML = recipes[recipeNum].recipeName;
             DescriptionNameElement.innerHTML = recipes[recipeNum].decription;
 
@@ -187,6 +189,11 @@
             for(let i = 0; i < recipes[recipeNum].steps.length; i++) {
                 $("ol").append("<li>" + recipes[recipeNum].steps[i] + "</li>");
             }
+
+            function updateLikes() {
+                LikesElement.innerText = parseInt(LikesElement.innerText) + 1;
+            }
+            document.getElementById("like-btn").addEventListener("click", updateLikes);
 
         }
     </script>
@@ -213,8 +220,11 @@
         </div>
     
         <div class="user-ratings">
-            like
-            comment 
+            <input type="button" value="Like" id="like-btn">
+            <div id="likes">
+                0
+            </div>
+                
         </div>
 
 
