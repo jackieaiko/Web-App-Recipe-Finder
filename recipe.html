@@ -64,8 +64,8 @@
                 comments: []
             },
             {
-                recipeName: 'fried rice',
-                recipeurl: 'fried-rice.jpg',
+                recipeName: 'Fried Rice',
+                recipeurl: 'recipe_images/fried_rice.jpg',
                 decription: 'this a dish made with rice and left over meats',
                 ingredients: ['rice', 'egg', 'peas'],
                 steps: ['make eggs', 'make rice'], 
@@ -73,8 +73,89 @@
                 comments: []
             },
             {
-                recipeName: 'chicken sandwich',
-                recipeurl: 'chicken-sandwich.jpg',
+                recipeName: 'Chicken Sandwich',
+                recipeurl: 'recipe_images/biscuit_chicken.jpg',
+                decription: 'this is sandwich containing gravy and chicken',
+                ingredients: ['gravy', 'chicken', 'biscuit'],
+                steps: ['fry chicken', 'make gravy'], 
+                likes: 0,
+                comments: []
+            },
+            {
+                recipeName: 'Sushi Roll',
+                recipeurl: 'recipe_images/sushi_roll.jpg',
+                decription: 'this is sandwich containing gravy and chicken',
+                ingredients: ['gravy', 'chicken', 'biscuit'],
+                steps: ['fry chicken', 'make gravy'], 
+                likes: 0,
+                comments: []
+            },
+            {
+                recipeName: 'Birria Tacos',
+                recipeurl: 'recipe_images/birria_tacos.jpg',
+                decription: 'this is sandwich containing gravy and chicken',
+                ingredients: ['gravy', 'chicken', 'biscuit'],
+                steps: ['fry chicken', 'make gravy'], 
+                likes: 0,
+                comments: []
+            },
+            {
+                recipeName: 'Breakfast Sandwich',
+                recipeurl: 'recipe_images/breakfast_sandwich.jpg',
+                decription: 'this is sandwich containing gravy and chicken',
+                ingredients: ['gravy', 'chicken', 'biscuit'],
+                steps: ['fry chicken', 'make gravy'], 
+                likes: 0,
+                comments: []
+            },
+            {
+                recipeName: 'Crepe',
+                recipeurl: 'recipe_images/crepe.jpg',
+                decription: 'this is sandwich containing gravy and chicken',
+                ingredients: ['gravy', 'chicken', 'biscuit'],
+                steps: ['fry chicken', 'make gravy'], 
+                likes: 0,
+                comments: []
+            },
+            {
+                recipeName: 'Pho',
+                recipeurl: 'recipe_images/pho.jpg',
+                decription: 'this is sandwich containing gravy and chicken',
+                ingredients: ['gravy', 'chicken', 'biscuit'],
+                steps: ['fry chicken', 'make gravy'], 
+                likes: 0,
+                comments: []
+            },
+            {
+                recipeName: 'Saimen',
+                recipeurl: 'recipe_images/saimen.jpg',
+                decription: 'this is sandwich containing gravy and chicken',
+                ingredients: ['gravy', 'chicken', 'biscuit'],
+                steps: ['fry chicken', 'make gravy'], 
+                likes: 0,
+                comments: []
+            },
+            {
+                recipeName: 'Shwarma',
+                recipeurl: 'recipe_images/shwarma.jpg',
+                decription: 'this is sandwich containing gravy and chicken',
+                ingredients: ['gravy', 'chicken', 'biscuit'],
+                steps: ['fry chicken', 'make gravy'], 
+                likes: 0,
+                comments: []
+            },
+            {
+                recipeName: 'Shwarma Fries',
+                recipeurl: 'recipe_images/shwarma_fries.jpg',
+                decription: 'this is sandwich containing gravy and chicken',
+                ingredients: ['gravy', 'chicken', 'biscuit'],
+                steps: ['fry chicken', 'make gravy'], 
+                likes: 0,
+                comments: []
+            },
+            {
+                recipeName: 'Prok Rib',
+                recipeurl: 'recipe_images/pork_rib.jpg',
                 decription: 'this is sandwich containing gravy and chicken',
                 ingredients: ['gravy', 'chicken', 'biscuit'],
                 steps: ['fry chicken', 'make gravy'], 
@@ -87,27 +168,26 @@
     <script>
         window.addEventListener("DOMContentLoaded", domLoaded);
         function domLoaded() {
-            let recipeNum = localStorage.get("recipeNum");
+            let recipeNum = parseInt(localStorage.getItem("recipeNum"));
 
             let RecipeNameElement = document.getElementById("recipe-name");
             let DescriptionNameElement = document.getElementById("description");
 
             let IngredientsElement = document.getElementById("ingredients");
 
-            RecipeNameElement.innerHTML = recipes[0].recipeName;
-            DescriptionNameElement.innerHTML = recipes[0].decription;
+            RecipeNameElement.innerHTML = recipes[recipeNum].recipeName;
+            DescriptionNameElement.innerHTML = recipes[recipeNum].decription;
 
-            $("img").attr("src", recipes[0].recipeurl)
+            $("img").attr("src", recipes[recipeNum].recipeurl);
 
-            for(let i = 0; i < recipes[0].ingredients.length; i++) {
+            for(let i = 0; i < recipes[recipeNum].ingredients.length; i++) {
                 $("ul").append("<li>" + recipes[0].ingredients[i] + "</li>");
             }
 
-            for(let i = 0; i < recipes[0].steps.length; i++) {
-                $("ol").append("<li>" + recipes[0].steps[i] + "</li>");
+            for(let i = 0; i < recipes[recipeNum].steps.length; i++) {
+                $("ol").append("<li>" + recipes[recipeNum].steps[i] + "</li>");
             }
 
-            
         }
     </script>
 
@@ -139,11 +219,11 @@
 
 
     
-
+<!-- 
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+ -->
 
-    <script src="recipe.js"></script>
 
 
     <a href="index.html">Back to Home Page</a>
