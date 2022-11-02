@@ -94,25 +94,26 @@
             // for explore feature store value of which picture was clicked
             localStorage.clear();
             function RecipePage1() {
-                localStorage.setItem("recipeNum", "1");
+                localStorage.setItem("recipeNum", "11");
             }
             document.getElementById("form1").addEventListener("submit", RecipePage1);
 
             function RecipePage2() {
-                localStorage.setItem("recipeNum", "2");
+                localStorage.setItem("recipeNum", "1");
             }
             document.getElementById("form2").addEventListener("submit", RecipePage2);
 
             function RecipePage3() {
-                localStorage.setItem("recipeNum", "3");
+                localStorage.setItem("recipeNum", "10");
             }
             document.getElementById("form3").addEventListener("submit", RecipePage3);
 
             function RecipePage4() {
-                localStorage.setItem("recipeNum", "4");
+                localStorage.setItem("recipeNum", "2");
             }
             document.getElementById("form4").addEventListener("submit", RecipePage4);
             
+            // search for recipe in search bar, then submit
             function searchRecipe(event) {
                 if(searchName.value == "Pork Buns" )
                     localStorage.setItem("recipeNum", "0");
@@ -126,21 +127,20 @@
                     localStorage.setItem("recipeNum", "4");
                 else if(searchName.value == "Breakfast Sandwich" )
                     localStorage.setItem("recipeNum", "5");
-                else if(searchName.value == "birria tacos" )
-                    localStorage.setItem("recipeNum", "6");
-                else if(searchName.value == "Crepe" )
-                    localStorage.setItem("recipeNum", "7");
-                else if(searchName.value == "Pho" )
-                    localStorage.setItem("recipeNum", "8");
-                else if(searchName.value == "Saimen" )
-                    localStorage.setItem("recipeNum", "9");
-                else if(searchName.value == "Shwarma" )
-                    localStorage.setItem("recipeNum", "10");
-                else if(searchName.value == "Shwarma Fries" )
+                else if(searchName.value == "Pork Rib" )
                     localStorage.setItem("recipeNum", "11");
+                else if(searchName.value == "Crepe" )
+                    localStorage.setItem("recipeNum", "6");
+                else if(searchName.value == "Pho" )
+                    localStorage.setItem("recipeNum", "7");
+                else if(searchName.value == "Saimen" )
+                    localStorage.setItem("recipeNum", "8");
+                else if(searchName.value == "Shwarma" )
+                    localStorage.setItem("recipeNum", "9");
+                else if(searchName.value == "Shwarma Fries" )
+                    localStorage.setItem("recipeNum", "10");
                 else 
-                    event.preventDefault();
-                
+                    event.preventDefault();   
             }
             document.getElementById("search-form").addEventListener("submit", searchRecipe);
             
@@ -176,11 +176,20 @@
             <h3>A Recipe Website for all your snacking needs</h3>
             <p>
                 Our mission is give our users a satisfactory experience
-                in finding recipes that are delicious and fun. Enjoy!
+                in finding recipes that are delicious and fun. This website 
+                contains many recipes ranging from breakfast to dinner. 
             </p>
 
             <p>
-                More decriptions and talk about the website
+                To find the recipe you are looking for, either click on a recipe
+                in the explore section or search for a recipe in the search bar.
+            </p>
+            <p>
+                To view your profile and your favorite recipes, just Click to
+                Edit Profile.
+            </p>
+            <p>
+                Enjoy!
             </p>
         </div>
     </div>

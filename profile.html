@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
 
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+     crossorigin="anonymous"></script>
+
     <style>
         .title {
             background-color: rgb(255, 252, 90);
@@ -24,6 +28,16 @@
             max-width: 930px;
             padding: 5px;
         }
+
+        img {
+            width: 200px;
+            height: 250px;
+            border-color: black;
+            border-width: 6px;
+            border-style: inset;
+            border-radius: 15px;
+            margin: 6px;
+        }
         
     </style>
 
@@ -38,25 +52,56 @@
             let fnameBtnElement = document.getElementById("saveBtnf");
             let lnameBtnElement = document.getElementById("saveBtnl");
 
+            let recipeFavElement = document.getElementById("recipes");
+            
+            
+            $("#fname").attr("placeholder", localStorage.getItem("fname"));
+            $("#lname").attr("placeholder", localStorage.getItem("lname"));
+            //saves value of first name
+            fnameBtnElement.addEventListener("click", () => {
+                if(FirstNameElement.value.length > 0) {
+                    localStorage.setItem("fname", FirstNameElement.value);          
+                }
+            });
 
-            // if(localStorage.getItem("fname")) {
-            //     FirstNameElement.innerText = localStorage.getItem("fname");
-            // }
+            // saves value of last name
+            lnameBtnElement.addEventListener("click", () => {
+                if(LastNameElement.value.length > 0) {
+                    localStorage.setItem("lname", LastNameElement.value);
+                }
+            });
+            
 
-            // saves value of first name
-            // fnameBtnElement.addEventListener("click", () => {
-            //     if(FirstNameElement.value.length > 0) {
-            //         localStorage.setItem("fname", FirstNameElement.value);
-            //         FirstNameElement.innerText = FirstNameElement.value;
-            //     }
-            // });
-
-            // // saves value of last name
-            // lnameBtnElement.addEventListener("click", () => {
-            //     if(LastNameElement.value.length > 0) {
-            //         localStorage.setItem("lname", LastNameElement.value);
-            //     }
-            // });
+            function addRecipe(event) {
+                if(recipeFavElement.value == "Pork Bun" )
+                    $("#saved-imgs").append("<img src='recipe_images/pork_bun.jpg'>");
+                else if(recipeFavElement.value == "Fried Rice" )
+                    $("#saved-imgs").append("<img src='recipe_images/fried_rice.jpg'>");
+                else if(recipeFavElement.value == "Chicken Sandwich" )
+                    $("#saved-imgs").append("<img src='recipe_images/biscuit_chicken.jpg'>");
+                else if(recipeFavElement.value == "Sushi Roll" )
+                    $("#saved-imgs").append("<img src='recipe_images/sushi_roll.jpg'>");
+                else if(recipeFavElement.value == "Birria Tacos" )
+                    $("#saved-imgs").append("<img src='recipe_images/birria_tacos.jpg'>");
+                else if(recipeFavElement.value == "Breakfast Sandwich" )
+                    $("#saved-imgs").append("<img src='recipe_images/breakfast_sandwich.jpg'>");
+                else if(recipeFavElement.value == "Pork Rib" )
+                    $("#saved-imgs").append("<img src='recipe_images/pork_rib.jpg'>");
+                else if(recipeFavElement.value == "Crepe" )
+                    $("#saved-imgs").append("<img src='recipe_images/crepe.jpg'>");
+                else if(recipeFavElement.value == "Pho" )
+                    $("#saved-imgs").append("<img src='recipe_images/pho.jpg'>");
+                else if(recipeFavElement.value == "Saimen" )
+                    $("#saved-imgs").append("<img src='recipe_images/saimen.jpg'>");
+                else if(recipeFavElement.value == "Shwarma" )
+                    $("#saved-imgs").append("<img src='recipe_images/shwarma.jpg'>");
+                else if(recipeFavElement.value == "Shwarma Fries" )
+                    $("#saved-imgs").append("<img src='recipe_images/shwarma_fries.jpg'>");
+                else 
+                    event.preventDefault();   
+            }
+            document.getElementById("add-recipe-btn").addEventListener("click", addRecipe);
+            
 
 
         }
@@ -82,6 +127,24 @@
 
     <div class="saved-recipes">
         <h2>Saved Recipes</h2>
+        <select name="recipe-options" id="recipes">
+            <option value="Pork Bun">Pork Bun</option>
+            <option value="Fried Rice">Fried Rice</option>
+            <option value="Birria Tacos">Birria Tacos</option>
+            <option value="Sushi Roll">Sushi Roll</option>
+            <option value="Shwarma">Shwarma</option>
+            <option value="Shwarma Fries">Shwarma Fries</option>
+            <option value="Crepe">Crepe</option>
+            <option value="Pork Rib">Pork Rib</option>
+            <option value="Pho">Pho</option>
+            <option value="Saimen">Saimen</option>
+            <option value="Chicken Sandwich">Chicken Sandwich</option>
+            <option value="Breakfast Sandwich">Breakfast Sandwich</option>
+        </select>
+        <input type="button" value="Add recipe" id="add-recipe-btn">
+        <div id="saved-imgs">
+
+        </div>
     </div>
 
     <a href="index.html">Back to Home Page</a>
