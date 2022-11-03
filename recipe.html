@@ -226,24 +226,36 @@
 <body>
         <div class="title">
             <h1 id="recipe-name"></h1>
+
+            <div class="navigation">
+                <nav>
+                    <a href="#recipe-description">Recipe Description</a>
+                    <a href="#recipe-ingredients">Ingredients</a>
+                    <a href="#recipe-steps">Steps</a>
+                    <a href="#user-ratings">Ratings</a>
+                    <a href="#photo-upload">Uploaded Photos</a>
+                </nav>
+            </div>
+
+
             <img id="pic">
         </div>
     
-        <div class="recipe-description">
+        <div class="recipe-description" id="recipe-description">
             <p id="description"></p>
         </div>
     
-        <div class="recipe-ingredients">
+        <div class="recipe-ingredients" id="recipe-ingredients">
             Ingredients
             <ul></ul>
         </div>
     
-        <div class="recipe-steps">
+        <div class="recipe-steps" id="recipe-steps">
             Steps
             <ol></ol>
         </div>
     
-        <div class="user-ratings">
+        <div class="user-ratings" id="user-ratings">
             <h4>Like</h4>
             <input type="button" value="Like" id="like-btn">
             <u id="likes">
