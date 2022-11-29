@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Page</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+     crossorigin="anonymous"></script>
+     
+     <style>
+        .title {
+            background-color: rgb(255, 252, 90);
+            max-width: 930px;
+            padding: 5px;
+        }
+
+        .recipe-description {
+            background-color: rgb(211, 242, 249);
+            max-width: 930px;
+            padding: 5px;
+        }
+
+        .recipe-ingredients {
+            background-color: rgb(211, 225, 249);
+            max-width: 930px;
+            padding: 5px;
+        }
+
+        .recipe-steps {
+            background-color: rgb(211, 242, 249);
+            max-width: 930px;
+            padding: 5px;
+        }
+        .user-ratings {
+            background-color: rgb(211, 225, 249);
+            max-width: 930px;
+            padding: 5px;
+        }
+
+        #pic {
+            width: 500px;
+            height: 650px;
+            position: relative;
+            left: 200px; 
+            border-color: black; 
+            border-width: 1px;
+            border-style: inset;
+            margin: 6px;
+        }
+
+        img {
+            width: 200px;
+            height: 250px;
+            border-color: black;
+            border-width: 6px;
+            border-style: inset;
+            border-radius: 15px;
+            margin: 6px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <% recipeResults.forEach(function(response) { //debugger; %>
+        <div class="title">
+            <h1 id="recipe-name"><%= response.recipeName %></h1>
+
+            <div class="navigation">
+                <nav>
+                    <a href="#recipe-description">Recipe Description</a>
+                    <a href="#recipe-ingredients">Ingredients</a>
+                    <a href="#recipe-steps">Steps</a>
+                    <a href="#user-ratings">Ratings</a>
+                    <a href="#photo-upload">Uploaded Photos</a>
+                </nav>
+            </div>
+
+            <img id="pic" src=<%=response.recipeurl%>>
+        </div>
+    
+        <div class="recipe-description" id="recipe-description">
+            <p id="description"><%= response.decription %></p>
+        </div>
+    
+        <div class="recipe-ingredients" id="recipe-ingredients">
+            Ingredients
+            
+            <ul>
+                <% response.ingredients.forEach((ingredient)=>{%>
+                    <li><%=ingredient%></li> 
+                <%});%>
+            </ul>
+        </div>
+    
+        <div class="recipe-steps" id="recipe-steps">
+            Steps
+            <ol>
+                <% response.steps.forEach((step)=>{%>
+                    <li><%=step%></li> 
+                <%});%>
+            </ol>
+        </div>
+    
+        <div class="user-ratings" id="user-ratings">
+            <h4>Like</h4>
+            <input type="button" value="Like" id="like-btn">
+            <u id="likes">
+                <%= response.likes %>
+            </u>
+            
+            <div id="comment">
+                <h4>Comment</h4>
+                <form action="recipe/<%= response.recipeName %>" method="put">
+                    <input type="text" id="comments" name="comments">
+                    <input type="button" id="comment-btn" value="upload"> 
+                </form>
+                <% response.comments.forEach((comment)=>{%>
+                    <li><%=step%></li> 
+                <%});%>
+            </div>
+
+            <div id="photo-upload">
+                <h4>Upload Photos</h4>
+                <input type="text" id="upload-photo" name="upload-photo" placeholder="url">
+                <input type="button" id="uphoto-btn" value="upload"> 
+            </div>
+
+
+        </div>
+        <% }); %>
+
+    <a href="index.html">Back to Home Page</a>
+</body>
+
+</html>

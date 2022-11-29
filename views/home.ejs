@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+
+    <link href="home.css" rel="stylesheet">
+
+    <style>
+        .intro {
+            background-color: rgb(255, 252, 90);
+            max-width: 930px;
+            padding: 5px;
+        }
+
+        .info {
+            background-color: rgb(211, 242, 249);
+            max-width: 930px;
+            padding: 5px;
+            display: flex;
+        }
+
+        .suggested {
+            background-color: rgb(211, 225, 249);
+            max-width: 930px;
+            padding: 5px;
+        }
+
+        .featured-recipe {
+            background-color: rgb(211, 242, 249);
+            padding: 5px;
+            max-width: 930px;
+            display: grid;
+        }
+
+        #img1, #img2, #featured {
+            width: 200px;
+            height: 250px;
+            border-color: black;
+            border-width: 6px;
+            border-style: inset;
+            border-radius: 15px;
+            margin: 6px;
+        }
+        #img3, #img4 {
+            width: 200px;
+            height: 250px;
+            border-color: black;
+            border-width: 6px;
+            border-style: inset;
+            border-radius: 15px;
+            margin: 6px;
+        }
+
+        #profile-pic {
+            width: 200px;
+            height: 220px;
+            border-color: black;
+            border-width: 1px;
+            border-radius: 15px;
+        }
+
+        .description {
+            margin: 10px;
+        }
+
+        .profile h3 {
+            position: relative;
+            left: 70px; 
+        }
+
+        .description h3 {
+            position: relative;
+            left: 100px;
+        }
+
+        .suggested h3 {
+            position: relative;
+            left: 390px;
+        }
+        .forms {
+            display: flex;
+        }
+
+        .search-recipe {
+            position: fixed;
+            top: 32px; 
+            left: 700px;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+    crossorigin="anonymous"></script>
+
+    <script>
+        // var featureNum = Math.floor(Math.random() * 12);
+        // $("#featured").attr("src", recipes[featureNum].recipeurl);
+
+        // const randomFile = require('select-random-file')
+        // const dir = '/public/recipe_images'
+        // randomFile(dir, (err, file) => {
+        // console.log(`The random file is: ${file}.`)
+        //     $("#featured").attr("src", file);
+        // })
+
+        var fs = require('fs');;
+        var files = fs.readdirSync('/public/recipe_images/');
+        /* now files is an Array of the name of the files in the folder and you can pick a random name inside of that array */
+        let chosenFile = files[Math.floor(Math.random() * files.length)] ;;
+        $("#featured").attr("src", chosenFile);
+
+    </script>
+</head>
+
+<body>
+    <div class="intro">
+        <h1>Jackie's Snackies</h1>
+
+        <div class="search-recipe">
+        
+            <form action="/recipe" method="post" id="search-form">
+                <input type="text" id="recipeName" name="recipeName">
+                <input type="submit" value="Search" id="search-btn">
+            </form>
+        </div>
+
+        <div class="navigation"> 
+            <nav>
+                <a href="#profile-pic">Information</a>
+                <a href="#suggested">Explore</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="info">
+        <div class="profile">
+            <h3>Profile</h3>
+            <img src="/recipe_images/profile_pic.jpg" alt="profile" id="profile-pic">
+
+            <button id="profile-btn"><a href="/profile">Click to Edit Profile</a></button>
+        </div>
+
+        <div class="description">
+            <h3>A Recipe Website for all your snacking needs</h3>
+            <p>
+                Our mission is give our users a satisfactory experience
+                in finding recipes that are delicious and fun. This website 
+                contains many recipes ranging from breakfast to dinner. 
+            </p>
+
+            <p>
+                To find the recipe you are looking for, either click on a recipe
+                in the explore section or search for a recipe in the search bar.
+            </p>
+            <p>
+                To view your profile and your favorite recipes, just Click to
+                Edit Profile.
+            </p>
+            <p>
+                Enjoy!
+            </p>
+        </div>
+    </div>
+
+    <div class="suggested" id="suggested">
+        <h3>Explore Suggested</h3>
+        <div class="forms">
+            <form action="/recipe" method="post" id="form1">
+                <button type="submit" name="recipeName" value="Pork Rib"><img id="img1" src="/recipe_images/pork_rib.jpg"></button>
+                <button type="submit" name="recipeName" value="Fried Rice"><img id="img2" src="/recipe_images/fried_rice.jpg"></button>
+                <button type="submit" name="recipeName" value="Shwarma Fries"><img id="img3" src="/recipe_images/shwarma_fries.jpg"></button>
+                <button type="submit" name="recipeName" value="Chicken Sandwich"><img id="img4" src="/recipe_images/biscuit_chicken.jpg"></button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="featured-recipe">
+        <h3>Featured Recipe</h3>
+
+    <form action="/recipe" method="post" id="featured-img">
+        <button type="submit"><img id="featured" src=""></button>
+    </form>
+    </div>
+
+</body>
+</html>

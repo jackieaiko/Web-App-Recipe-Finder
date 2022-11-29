@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+     crossorigin="anonymous"></script>
+
+    <style>
+        .title {
+            background-color: rgb(255, 252, 90);
+            max-width: 930px;
+            padding: 5px;
+        }
+
+        .user-name {
+            background-color: rgb(211, 242, 249);
+            max-width: 930px;
+            padding: 5px;
+        }
+
+        .saved-recipes {
+            background-color: rgb(211, 242, 249);
+            max-width: 930px;
+            padding: 5px;
+        }
+
+        .profile-background {
+            background-color:  rgb(211, 225, 249);
+            max-width: 930px;
+            padding: 5px;
+        }
+
+        img {
+            width: 200px;
+            height: 250px;
+            border-color: black;
+            border-width: 6px;
+            border-style: inset;
+            border-radius: 15px;
+            margin: 6px;
+        }
+        
+    </style>
+
+</head>
+
+<body>
+    <div class="title">
+        <h1>Your Profile</h1>
+    </div>
+
+    
+    <form action="/profile" method="post">
+        <div class="user-name">
+            <label>First Name:
+                <input type="text" id="firstName" name="firstName">
+            </label> 
+        
+            <p></p>
+
+            <label>Last Name:
+                <input type="text" id="lastName" name="lastName">
+            </label>
+        </div>
+
+        <div class="profile-background">
+            <label>Background Color:
+                <select name="backgroundColor" id="backgroundColor">
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="red">Red</option>
+                    <option value="orange">Orange</option>
+                </select>
+            </label>
+        </div>
+
+        <button type="submit">Edit (Save Changes)</button>
+    </form>
+
+    <div class="saved-recipes">
+        <h2>Saved Recipes</h2>
+        <select name="recipe-options" id="recipes">
+            <option value="Pork Bun">Pork Bun</option>
+            <option value="Fried Rice">Fried Rice</option>
+            <option value="Birria Tacos">Birria Tacos</option>
+            <option value="Sushi Roll">Sushi Roll</option>
+            <option value="Shwarma">Shwarma</option>
+            <option value="Shwarma Fries">Shwarma Fries</option>
+            <option value="Crepe">Crepe</option>
+            <option value="Pork Rib">Pork Rib</option>
+            <option value="Pho">Pho</option>
+            <option value="Saimen">Saimen</option>
+            <option value="Chicken Sandwich">Chicken Sandwich</option>
+            <option value="Breakfast Sandwich">Breakfast Sandwich</option>
+        </select>
+        <input type="button" value="Add recipe" id="add-recipe-btn">
+        <div id="saved-imgs">
+
+        </div>
+    </div>
+
+    <a href="index.html">Back to Home Page</a>
+</body>
+</html>
