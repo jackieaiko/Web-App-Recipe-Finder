@@ -10,7 +10,6 @@ app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 
-// app.use("/api/profile", require("./api/profile"));
 
 const PORT = process.env.PORT || 8080; 
 
@@ -70,12 +69,44 @@ app.get('/recipe/:recipeName', (req, res) => {
 })
 
 
-app.post("/profile", (req, res) => {
+// create profile name
+app.post("/profilecreated", (req, res) => {
 
     let result = ProfileInfo(
         {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
+        });
+
+    result.save(
+        (err, result) => {
+            if (err) {
+                //note that we are not handling this error! You'll want to do this yourself!
+                return console.log("Error: " + err);
+            }
+            console.log(`Success! Inserted data with _id: ${result._id} into the database.`);
+            res.redirect("/profilecreated");
+        });
+});
+
+app.get("/profilecreated", (req, res) => {
+
+    //Using the static model method to query the database
+    ProfileInfo.find(
+        {},
+        (err, results) => {
+            console.log(results)
+            res.render("profilecreated.ejs", {
+                formResults: results
+            });
+        });
+});
+
+// modify background color
+app.post("/profile/:_id", (req, res) => {
+
+    let result = ProfileInfo(
+        {
             backgroundColor: req.body.backgroundColor
         });
 
