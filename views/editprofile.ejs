@@ -47,60 +47,6 @@
         
     </style>
 
-<script>
-    window.addEventListener("DOMContentLoaded", domLoaded);
-    function domLoaded() {
-
-
-        let FirstNameElement = document.getElementById("fname");
-        let LastNameElement = document.getElementById("lname");
-
-        let fnameBtnElement = document.getElementById("saveBtnf");
-        let lnameBtnElement = document.getElementById("saveBtnl");
-
-        let recipeFavElement = document.getElementById("recipes");
-        let backgroundColorElement = document.getElementById("color-choice");
-        
-
-        document.getElementById("add-recipe-btn").addEventListener("click", addRecipe);
-
-
-        function changeColor(event) {
-            if(backgroundColorElement.value == "blue" ) {
-                $(".user-name").css("background-color", "blue");
-                $(".saved-recipes").css("background-color", "blue");
-                $(".profile-background").css("background-color", "blue");
-            }
-            else if(backgroundColorElement.value == "green" ) {
-                $(".user-name").css("background-color", "green");
-                $(".saved-recipes").css("background-color", "green");
-                $(".profile-background").css("background-color", "green");
-            }
-            else if(backgroundColorElement.value == "yellow" ) {
-                $(".user-name").css("background-color", "yellow");
-                $(".saved-recipes").css("background-color", "yellow");
-                $(".profile-background").css("background-color", "yellow");
-            }   
-            else if(backgroundColorElement.value == "red" ) {
-                $(".user-name").css("background-color", "red");
-                $(".saved-recipes").css("background-color", "red");
-                $(".profile-background").css("background-color", "red");
-            }   
-            else if(backgroundColorElement.value == "orange" ) {
-                $(".user-name").css("background-color", "orange");
-                $(".saved-recipes").css("background-color", "orange");
-                $(".profile-background").css("background-color", "orange");
-            }
-            else 
-                event.preventDefault();   
-        }
-        document.getElementById("color-btn").addEventListener("click", changeColor);
-        
-
-
-    }
-</script>
-
 </head>
 
 <body>
@@ -109,58 +55,46 @@
     </div>
 
     <% //debugger; %>
-    <form action="/profile/<%= response._id %>" method="POST">
+    <form action="/editprofile/<%= response._id %>" method="POST">
     
-        <div class="user-name">
-            <label>First Name:
-                <input type="text" id="firstName" name="firstName">
-            </label> 
-        
-            <p></p>
 
-            <label>Last Name:
-                <input type="text" id="lastName" name="lastName">
+        <div class="profile-background">
+            <label>Background Color:
+                <select name="backgroundColor" id="backgroundColor">
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="red">Red</option>
+                    <option value="orange">Orange</option>
+                </select>
             </label>
         </div>
 
-
-    <button id="profile-edit"><a href="/editprofile/<%= response._id %>">Click to Edit Profile</a></button>
-
-    <div class="profile-background">
-        <label>Background Color:
-            <select name="backgroundColor" id="backgroundColor">
-                <option value="blue">Blue</option>
-                <option value="green">Green</option>
-                <option value="yellow">Yellow</option>
-                <option value="red">Red</option>
-                <option value="orange">Orange</option>
+        <div class="saved-recipes">
+            <h2>Saved Recipes</h2>
+            <select name="recipe-options" id="recipes">
+                <option value="Pork Bun">Pork Bun</option>
+                <option value="Fried Rice">Fried Rice</option>
+                <option value="Birria Tacos">Birria Tacos</option>
+                <option value="Sushi Roll">Sushi Roll</option>
+                <option value="Shwarma">Shwarma</option>
+                <option value="Shwarma Fries">Shwarma Fries</option>
+                <option value="Crepe">Crepe</option>
+                <option value="Pork Rib">Pork Rib</option>
+                <option value="Pho">Pho</option>
+                <option value="Saimen">Saimen</option>
+                <option value="Chicken Sandwich">Chicken Sandwich</option>
+                <option value="Breakfast Sandwich">Breakfast Sandwich</option>
             </select>
-        </label>
-    </div>
 
-    <div class="saved-recipes">
-        <h2>Saved Recipes</h2>
-        <select name="recipe-options" id="recipes">
-            <option value="Pork Bun">Pork Bun</option>
-            <option value="Fried Rice">Fried Rice</option>
-            <option value="Birria Tacos">Birria Tacos</option>
-            <option value="Sushi Roll">Sushi Roll</option>
-            <option value="Shwarma">Shwarma</option>
-            <option value="Shwarma Fries">Shwarma Fries</option>
-            <option value="Crepe">Crepe</option>
-            <option value="Pork Rib">Pork Rib</option>
-            <option value="Pho">Pho</option>
-            <option value="Saimen">Saimen</option>
-            <option value="Chicken Sandwich">Chicken Sandwich</option>
-            <option value="Breakfast Sandwich">Breakfast Sandwich</option>
-        </select>
+            <div id="saved-imgs">
 
-        <div id="saved-imgs">
-
+            </div>
         </div>
-    </div>
 
-    <a href="/home">Back to Home Page</a>
+        <button type="submit">Edit (Save Changes)</button>
+
+        <a href="/home">Back to Home Page</a>
 
     </form>
 </body>

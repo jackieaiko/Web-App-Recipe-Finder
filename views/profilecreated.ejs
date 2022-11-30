@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Created Page</title>
 
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+     crossorigin="anonymous"></script>
+
     <style>
         .title {
             background-color: rgb(255, 252, 90);
@@ -43,6 +47,18 @@
         
     </style>
 
+    <script>
+        window.addEventListener("DOMContentLoaded", domLoaded);
+        function domLoaded() {
+    
+            let backgroundColorlement = document.getElementById("backgroundColor").innerHTML;
+            $(".user-name").css("background-color", backgroundColorlement);
+            $(".saved-recipes").css("background-color", backgroundColorlement);
+            $(".profile-background").css("background-color", backgroundColorlement);
+    
+        }
+    </script>
+
 </head>
 
 <body>
@@ -55,31 +71,24 @@
     <% formResults.forEach(function(response) { //debugger; %>
         <div class="user-name">
             <label>First Name:
-                <p id="description"><%= response.firstName %></p>
+                <p id="firstName"><%= response.firstName %></p>
             </label> 
         
             <p></p>
 
             <label>Last Name:
-                <p id="description"><%= response.lastName %></p>
+                <p id="lastName"><%= response.lastName %></p>
             </label>
         </div>
 
+        <button id="profile-edit"><a href="/editprofile/<%= response._id %>">Click to Edit Profile</a></button>
 
-    <form action="/profile" method="post"></form>
         <div class="profile-background">
             <label>Background Color:
-                <select name="backgroundColor" id="backgroundColor">
-                    <option value="blue">Blue</option>
-                    <option value="green">Green</option>
-                    <option value="yellow">Yellow</option>
-                    <option value="red">Red</option>
-                    <option value="orange">Orange</option>
-                </select>
+                    <p id="backgroundColor" name="backgroundColor"><%= response.backgroundColor %></p>
             </label>
         </div>
-        <button type="submit">Edit (Save Changes)</button>
-    </form>
+
         
 
     <div class="saved-recipes">
@@ -98,7 +107,6 @@
             <option value="Chicken Sandwich">Chicken Sandwich</option>
             <option value="Breakfast Sandwich">Breakfast Sandwich</option>
         </select>
-        <input type="button" value="Add recipe" id="add-recipe-btn">
         <div id="saved-imgs">
 
         </div>

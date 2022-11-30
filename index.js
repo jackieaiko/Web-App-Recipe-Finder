@@ -33,6 +33,89 @@ app.get("/profile", (req, res) => {
 });
 
 
+// create profile name
+app.post("/profilecreated", (req, res) => {
+
+    let result = ProfileInfo(
+        {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            backgroundColor: "white"
+        });
+
+    result.save(
+        (err, result) => {
+            if (err) {
+                //note that we are not handling this error! You'll want to do this yourself!
+                return console.log("Error: " + err);
+            }
+            console.log(`Success! Inserted data with _id: ${result._id} into the database.`);
+            res.redirect("/profilecreated");
+        });
+});
+
+app.get("/profilecreated", (req, res) => {
+
+    //Using the static model method to query the database
+    ProfileInfo.find(
+        {},
+        (err, results) => {
+            console.log(results)
+            res.render("profilecreated.ejs/", {
+                formResults: results
+            });
+        });
+});
+
+// modify background color
+app.route("/editprofile/:_id")
+
+    .get((req, res) => {
+        let id = req.params._id;
+        console.log(id)
+
+        ProfileInfo.find(
+            {},
+            (err, results) => {
+                console.log("Found result: ");
+                console.log(results)
+
+                let result = {
+                    _id: id,
+                    firstName: results.firstName,
+                    lastName: results.lastName
+                };
+
+                res.render("editprofile.ejs", {
+                    response: result
+                });
+            });
+
+    })
+
+    .post(function (req, res) { 
+        console.log("posted")
+        let id = req.params._id;
+        let backgroundColor = req.body.backgroundColor;
+
+        ProfileInfo
+            .where({ _id: id })
+            .updateOne({
+                $set: {
+                    backgroundColor: backgroundColor
+                }
+            })
+            .exec(function (err, result) {
+                if (err) return res.send(err);
+                res.redirect("/profilecreated");
+                console.log(`Successfully updated ${result.modifiedCount} record`);
+            });
+});
+
+
+
+
+
 app.post("/recipe", (req, res) => {
 
     console.log(req.body.recipeName)
@@ -67,59 +150,6 @@ app.get('/recipe/:recipeName', (req, res) => {
             });
         });
 })
-
-
-// create profile name
-app.post("/profilecreated", (req, res) => {
-
-    let result = ProfileInfo(
-        {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-        });
-
-    result.save(
-        (err, result) => {
-            if (err) {
-                //note that we are not handling this error! You'll want to do this yourself!
-                return console.log("Error: " + err);
-            }
-            console.log(`Success! Inserted data with _id: ${result._id} into the database.`);
-            res.redirect("/profilecreated");
-        });
-});
-
-app.get("/profilecreated", (req, res) => {
-
-    //Using the static model method to query the database
-    ProfileInfo.find(
-        {},
-        (err, results) => {
-            console.log(results)
-            res.render("profilecreated.ejs", {
-                formResults: results
-            });
-        });
-});
-
-// modify background color
-app.post("/profile/:_id", (req, res) => {
-
-    let result = ProfileInfo(
-        {
-            backgroundColor: req.body.backgroundColor
-        });
-
-    result.save(
-        (err, result) => {
-            if (err) {
-                //note that we are not handling this error! You'll want to do this yourself!
-                return console.log("Error: " + err);
-            }
-            console.log(`Success! Inserted data with _id: ${result._id} into the database.`);
-            res.redirect("/profile");
-        });
-});
 
 app.post("/comments/:_id", (req, res) => {
 
