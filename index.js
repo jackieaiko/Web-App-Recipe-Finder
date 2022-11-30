@@ -21,6 +21,7 @@ app.listen(PORT, function () {
 // configre mongoose
 const RecipeInfo = require("./models/recipeinfo");
 const ProfileInfo = require("./models/profileinfo");
+const { populate } = require("./models/recipeinfo");
 
 // root path
 app.get("/home", (req, res) => {
@@ -40,12 +41,33 @@ app.post("/recipe", (req, res) => {
     RecipeInfo.find(
         {"recipeName": req.body.recipeName},
         (err, results) => {
-            console.log(results)
-            res.render("recipe.ejs", {
+            console.log(results._id)
+            res.render("recipe.ejs/", {
                 recipeResults: results
             });
         });
 });
+
+app.get('/recipe/:recipeName', (req, res) => {
+    let recipeName = req.params.recipeName
+    console.log(recipeName)
+    //Using the static model method to query the database
+    RecipeInfo.find(
+        {"recipeName": recipeName},
+        (err, results) => {
+            if (err) console.log("error: " + err)
+            console.log(results)
+            console.log(results._id)
+            console.log(results.recipeurl)
+
+            for (let i = 0; i < results.length; i++) {
+                results[i].recipeurl = 'public/'+results[i].recipeurl
+            }
+            res.render("recipe.ejs/", {
+                recipeResults: results
+            });
+        });
+})
 
 
 app.post("/profile", (req, res) => {
@@ -68,31 +90,74 @@ app.post("/profile", (req, res) => {
         });
 });
 
+app.post("/comments/:_id", (req, res) => {
 
+    console.log(1)
+    console.log(req.body.comments)
+    console.log(req.params._id)
 
-app.put("recipe/:recipeName", (req, res) => {
-
-    // let result = RecipeInfo(
+    // let recipe = RecipeInfo(
     //     {
-    //         comments: req.body.comments
-    //     });
+    //         _id: req.params._id
+    //     }
+    // )
+    let recipe = RecipeInfo.findOne({_id: _id})
 
-    RecipeInfo.updateOne( {
-        $push: {
-            comments: req.body.comments
-    }
-    });
+    let comments = recipe.comments
+    comments.push(req.body.comments)
 
-    console.log(req.body.comments);
-    console.log(req.body.recipeName);
+    RecipeInfo.findByIdAndUpdate(req.params._id, {comments: comments}, (err, result) => {
+        if (err) {
+            return console.log('Error: ' + err)
+        }
+        console.log("a random result!!!" +result.recipeName)
+        res.redirect(200, "/recipe/" + result.recipeName)
+    })
 
-    // result.save(
+    // recipe.comments.push(req.body.comments)
+    // recipe.fetchOneAndUpdate(
     //     (err, result) => {
     //         if (err) {
-    //             //note that we are not handling this error! You'll want to do this yourself!
-    //             return console.log("Error: " + err);
+    //             return console.log('Error: ' + err)
     //         }
-    //         console.log(`Success! Inserted data with _id: ${result._id} into the database.`);
-    //         res.redirect("/profile");
+    //         res.redirect(200, "/recipe/" + result.recipeName)
+    //     }
+    // )
+    //Using the static model method to query the database
+    // RecipeInfo.find(
+    //     {"recipeName": req.body.recipeName},
+    //     (err, results) => {
+    //         console.log(results)
+    //         res.render("recipe.ejs", {
+    //             recipeResults: results
+    //         });
     //     });
+    // res.render("recipe.ejs");
 });
+
+// app.route("/recipe/:_id", (req, res) => {
+
+//     // let result = RecipeInfo(
+//     //     {
+//     //         comments: req.body.comments
+//     //     });
+
+//     // RecipeInfo.updateOne( {
+//     //     $push: {
+//     //         comments: req.body.comments
+//     // }
+//     // });
+//     console.log(1);
+//     console.log(req.body.comments);
+//     console.log(req.body.recipeName);
+
+//     // result.save(
+//     //     (err, result) => {
+//     //         if (err) {
+//     //             //note that we are not handling this error! You'll want to do this yourself!
+//     //             return console.log("Error: " + err);
+//     //         }
+//     //         console.log(`Success! Inserted data with _id: ${result._id} into the database.`);
+//     //         res.redirect("/profile");
+//     //     });
+// });

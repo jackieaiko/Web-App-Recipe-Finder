@@ -63,6 +63,35 @@
         }
     </style>
 
+    <script>
+        app.post("/recipe/:_id", (req, res) => {
+
+        // let result = RecipeInfo(
+        //     {
+        //         comments: req.body.comments
+        //     });
+
+        // RecipeInfo.updateOne( {
+        //     $push: {
+        //         comments: req.body.comments
+        // }
+        // });
+        console.log(1);
+        console.log(req.body.comments);
+        console.log(req.body.recipeName);
+
+        // result.save(
+        //     (err, result) => {
+        //         if (err) {
+        //             //note that we are not handling this error! You'll want to do this yourself!
+        //             return console.log("Error: " + err);
+        //         }
+        //         console.log(`Success! Inserted data with _id: ${result._id} into the database.`);
+        //         res.redirect("/profile");
+        //     });
+        });
+    </script>
+
 </head>
 
 <body>
@@ -80,7 +109,7 @@
                 </nav>
             </div>
 
-            <img id="pic" src=<%=response.recipeurl%>>
+            <img id="pic" src=<%= response.recipeurl%>>
         </div>
     
         <div class="recipe-description" id="recipe-description">
@@ -115,12 +144,13 @@
             
             <div id="comment">
                 <h4>Comment</h4>
-                <form action="recipe/<%= response.recipeName %>" method="put">
+                <!-- <form action="/<%= response._id %>" method="post"> -->
+                <form action="http://localhost:8080/comments/<%= response._id %>" method="post">
                     <input type="text" id="comments" name="comments">
-                    <input type="button" id="comment-btn" value="upload"> 
+                    <input type="submit" id="comment-btn" value="upload"> 
                 </form>
                 <% response.comments.forEach((comment)=>{%>
-                    <li><%=step%></li> 
+                    <li><%=comment%></li> 
                 <%});%>
             </div>
 
