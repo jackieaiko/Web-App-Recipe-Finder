@@ -52,10 +52,10 @@
         function domLoaded() {
     
             let backgroundColorlement = document.getElementById("backgroundColor").innerHTML;
+
             $(".user-name").css("background-color", backgroundColorlement);
             $(".saved-recipes").css("background-color", backgroundColorlement);
             $(".profile-background").css("background-color", backgroundColorlement);
-    
         }
     </script>
 
@@ -107,6 +107,14 @@
             <option value="Chicken Sandwich">Chicken Sandwich</option>
             <option value="Breakfast Sandwich">Breakfast Sandwich</option>
         </select>
+
+        <p id="savedRecipes" name="savedRecipes">
+            <ul id="list">
+                <% response.savedRecipes.forEach((recipe)=>{%>
+                    <li><%=recipe%></li> 
+                <%});%>
+            </ul>
+        </p>
         <div id="saved-imgs">
 
         </div>

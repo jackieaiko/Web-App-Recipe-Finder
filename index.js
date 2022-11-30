@@ -40,7 +40,8 @@ app.post("/profilecreated", (req, res) => {
         {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            backgroundColor: "white"
+            backgroundColor: "white",
+            savedRecipes: []
         });
 
     result.save(
@@ -97,12 +98,16 @@ app.route("/editprofile/:_id")
         console.log("posted")
         let id = req.params._id;
         let backgroundColor = req.body.backgroundColor;
+        let savedRecipes = req.body.savedRecipes;
 
         ProfileInfo
             .where({ _id: id })
             .updateOne({
                 $set: {
                     backgroundColor: backgroundColor
+                },
+                $push: {
+                    savedRecipes: savedRecipes
                 }
             })
             .exec(function (err, result) {
