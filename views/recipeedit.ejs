@@ -65,26 +65,14 @@
 
     <script>
         window.addEventListener("DOMContentLoaded", domLoaded);
+
+        let LikesElement = document.getElementById("likes");
         function domLoaded() {
-            let recipeNum = parseInt(localStorage.getItem("recipeNum"));
-
-            let RecipeNameElement = document.getElementById("recipe-name");
-            let DescriptionNameElement = document.getElementById("description");
-
-            let IngredientsElement = document.getElementById("ingredients");
-
-            let LikesElement = document.getElementById("likes");
-            let CommentElement = document.getElementById("comments");
-            let CommentInputElement = document.getElementById("comment");
-            let PhotoInputElement = document.getElementById("upload-photo");
-
-            RecipeNameElement.innerHTML = recipes[recipeNum].recipeName;
-            DescriptionNameElement.innerHTML = recipes[recipeNum].decription;
-
             function updateLikes() {
                 LikesElement.innerText = parseInt(LikesElement.innerText) + 1;
             }
-            document.getElementById("like-btn").addEventListener("click", updateLikes);
+
+            document.getElementById("likes-btn").addEventListener("click", updateLikes);
 
         }
     </script>
@@ -103,18 +91,14 @@
         <div class="user-ratings" id="user-ratings">
 
             <h4>Like</h4>
-            <input type="button" value="Like" id="like-btn">
-            <u id="likes">
+            <input type="radio" value="1" id="likes" name="likes">
+            <p>
                 <%= response.likes %>
-            </u>
+            </p>
             
             <div id="comment">
                 <h4>Comment</h4>
-
                     <input type="text" id="comments" name="comments">
-                    <input type="button" id="comment-btn" value="upload"> 
-               
-
             </div>
 
             <div id="photo-upload">

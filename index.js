@@ -185,14 +185,14 @@ app.route("/recipeedit/:_id")
         let id = req.params._id;
         let likes = req.body.likes;
         let comments = req.body.comments;
-        
-        console.log(comments)
+
+        console.log(likes)
 
         RecipeInfo
             .where({ _id: id })
             .updateOne({
                 $set: {
-                    likes: likes
+                    likes: parseInt(likes)
                 },
                 $push: {
                     comments: comments
