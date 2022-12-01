@@ -97,7 +97,7 @@
     <% recipeResults.forEach(function(response) { //debugger; %>
         <div class="title">
             <h1 id="recipe-name"><%= response.recipeName %></h1>
-            <%= response._id %>
+
             <div class="navigation">
                 <nav>
                     <a href="#recipe-description">Recipe Description</a>
@@ -135,29 +135,24 @@
         </div>
     
         <div class="user-ratings" id="user-ratings">
+            <h3>User Reviews and Ratings</h3>
+            
+            <button id="recipe-edit"><a href="/recipeedit/<%= response._id %>">Click to rate or post!</a></button>
 
-            <button id="recipe-edit"><a href="/recipeedit/<%= response._id %>">Click to Edit recipe</a></button>
-
-            <h4>Like</h4>
-            <input type="button" value="Like" id="like-btn">
+            <h4>Likes</h4>
             <u id="likes">
                 <%= response.likes %>
             </u>
             
+            <h4>Comments</h4>
             <div id="comment">
-                <h4>Comment</h4>
-                    <input type="text" id="comments" name="comments">
-                    <input type="button" id="comment-btn" value="upload"> 
-
                 <% response.comments.forEach((comment)=>{%>
                     <li><%=comment%></li> 
                 <%});%>
             </div>
 
             <div id="photo-upload">
-                <h4>Upload Photos</h4>
-                <input type="text" id="upload-photo" name="upload-photo" placeholder="url">
-                <input type="button" id="uphoto-btn" value="upload"> 
+                <h4>Uploaded Photos</h4>
             </div>
 
 

@@ -90,28 +90,27 @@
     
         <div class="user-ratings" id="user-ratings">
 
-            <h4>Like</h4>
-            <input type="radio" value="1" id="likes" name="likes">
-            <p>
-                <%= response.likes %>
-            </p>
-            
+            <label>Like
+                <input type="radio" value="1" id="likes" name="likes">
+            </label>
+
             <div id="comment">
-                <h4>Comment</h4>
+                <label>Comment
                     <input type="text" id="comments" name="comments">
+                </label>
             </div>
 
             <div id="photo-upload">
-                <h4>Upload Photos</h4>
-                <input type="text" id="upload-photo" name="upload-photo" placeholder="url">
-                <input type="button" id="uphoto-btn" value="upload"> 
+                <label>Upload Photo
+                    <input type="text" id="upload-photo" name="upload-photo" placeholder="url">
+                </label>
             </div>
         </div>
 
-        <button type="submit">Edit (Save Changes)</button>
+        <button type="submit">Post Content</button>
     </form>
 
-    <a href="/home">Back to Home Page</a> -->
+    <a href="/home">Back to Home Page</a>
 
 
 
