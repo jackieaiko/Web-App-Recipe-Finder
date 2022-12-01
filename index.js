@@ -20,7 +20,6 @@ app.listen(PORT, function () {
 // configre mongoose
 const RecipeInfo = require("./models/recipeinfo");
 const ProfileInfo = require("./models/profileinfo");
-const { populate } = require("./models/recipeinfo");
 
 // root path
 app.get("/home", (req, res) => {
@@ -68,7 +67,7 @@ app.get("/profilecreated", (req, res) => {
         });
 });
 
-// modify background color
+// modify background color and saved favorites
 app.route("/editprofile/:_id")
 
     .get((req, res) => {
@@ -121,6 +120,13 @@ app.route("/editprofile/:_id")
 
 
 
+
+
+
+
+
+
+// go to recipe
 app.post("/recipe", (req, res) => {
 
     console.log(req.body.recipeName)
@@ -128,102 +134,76 @@ app.post("/recipe", (req, res) => {
     RecipeInfo.find(
         {"recipeName": req.body.recipeName},
         (err, results) => {
-            console.log(results._id)
+            console.log(results)
             res.render("recipe.ejs/", {
                 recipeResults: results
             });
+
         });
 });
 
-app.get('/recipe/:recipeName', (req, res) => {
-    let recipeName = req.params.recipeName
-    console.log(recipeName)
+
+app.get("/recipe", (req, res) => {
+
     //Using the static model method to query the database
     RecipeInfo.find(
-        {"recipeName": recipeName},
+        {"recipeName": req.body.recipeName},
         (err, results) => {
-            if (err) console.log("error: " + err)
             console.log(results)
-            console.log(results._id)
-            console.log(results.recipeurl)
-
-            for (let i = 0; i < results.length; i++) {
-                results[i].recipeurl = 'public/'+results[i].recipeurl
-            }
             res.render("recipe.ejs/", {
                 recipeResults: results
             });
+
         });
-})
-
-app.post("/comments/:_id", (req, res) => {
-
-    console.log(1)
-    console.log(req.body.comments)
-    console.log(req.params._id)
-
-    // let recipe = RecipeInfo(
-    //     {
-    //         _id: req.params._id
-    //     }
-    // )
-    let recipe = RecipeInfo.findOne({_id: _id})
-
-    let comments = recipe.comments
-    comments.push(req.body.comments)
-
-    RecipeInfo.findByIdAndUpdate(req.params._id, {comments: comments}, (err, result) => {
-        if (err) {
-            return console.log('Error: ' + err)
-        }
-        console.log("a random result!!!" +result.recipeName)
-        res.redirect(200, "/recipe/" + result.recipeName)
-    })
-
-    // recipe.comments.push(req.body.comments)
-    // recipe.fetchOneAndUpdate(
-    //     (err, result) => {
-    //         if (err) {
-    //             return console.log('Error: ' + err)
-    //         }
-    //         res.redirect(200, "/recipe/" + result.recipeName)
-    //     }
-    // )
-    //Using the static model method to query the database
-    // RecipeInfo.find(
-    //     {"recipeName": req.body.recipeName},
-    //     (err, results) => {
-    //         console.log(results)
-    //         res.render("recipe.ejs", {
-    //             recipeResults: results
-    //         });
-    //     });
-    // res.render("recipe.ejs");
 });
 
-// app.route("/recipe/:_id", (req, res) => {
 
-//     // let result = RecipeInfo(
-//     //     {
-//     //         comments: req.body.comments
-//     //     });
 
-//     // RecipeInfo.updateOne( {
-//     //     $push: {
-//     //         comments: req.body.comments
-//     // }
-//     // });
-//     console.log(1);
-//     console.log(req.body.comments);
-//     console.log(req.body.recipeName);
 
-//     // result.save(
-//     //     (err, result) => {
-//     //         if (err) {
-//     //             //note that we are not handling this error! You'll want to do this yourself!
-//     //             return console.log("Error: " + err);
-//     //         }
-//     //         console.log(`Success! Inserted data with _id: ${result._id} into the database.`);
-//     //         res.redirect("/profile");
-//     //     });
-// });
+// modify recipe
+app.route("/recipeedit/:_id")
+
+    .get((req, res) => {
+        let id = req.params._id;
+        console.log(id)
+
+        RecipeInfo.find(
+            {_id: id},
+            (err, results) => {
+                console.log("Found result: ");
+                console.log(results)
+
+                res.render("recipeedit.ejs", {
+                    response: results[0]
+                });
+            });
+
+    })
+
+    .post(function (req, res) { 
+        console.log("posted")
+        let id = req.params._id;
+        let likes = req.body.likes;
+        let comments = req.body.comments;
+        
+        console.log(comments)
+
+        RecipeInfo
+            .where({ _id: id })
+            .updateOne({
+                $set: {
+                    likes: likes
+                },
+                $push: {
+                    comments: comments
+                }
+            })
+            .exec(function (err, result) {
+                if (err) return res.send(err);
+                res.redirect("/recipe");
+                console.log(`Successfully updated ${result.modifiedCount} record`);
+            });
+});
+
+
+
