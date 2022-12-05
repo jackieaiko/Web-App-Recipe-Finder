@@ -61,6 +61,10 @@
             border-radius: 15px;
             margin: 6px;
         }
+
+        #likes {
+            width: 10px
+        }
     </style>
 
     <script>
@@ -70,8 +74,8 @@
 
             likeElement = document.getElementById("like-num");
             function likeForm(event) {
-                likeElement.innerText = parseInt(likeElement.innerText) + 1;
-                document.getElementById("likes").value = likeElement.innerText;
+                document.getElementById("btn-label").innerText = "";
+                document.getElementById("likes").value = parseInt(document.getElementById("likes").value) + 1;
             }
             document.getElementById("like-btn").addEventListener('click', likeForm)
         }
@@ -90,16 +94,16 @@
     
         <div class="user-ratings" id="user-ratings">
 
-            Number of Likes
-            <p id="like-num">
-                <%= response.likes %>
-            </p>
-            <input type="button" value="Likes" id="like-btn">
-            <input type="text" value="" id="likes" name="likes" readonly>
-
-
+            
+            <label >Current Number of Likes:
+                <input type="text" value="<%= response.likes %>" id="likes" name="likes" readonly>
+                <label id="btn-label"><input type="button" value="Click to Like" id="like-btn"></label>
+                
+            </label>
+            
+            <p></p>
             <div id="comment">
-                <label>Comment
+                <label>Create a Comment
                     <input type="text" id="comments" name="comments">
                 </label>
             </div>

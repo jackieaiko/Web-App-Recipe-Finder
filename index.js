@@ -216,21 +216,21 @@ app.route("/recipeedit/:_id")
         console.log(likes)
         console.log(comments)
 
-        // RecipeInfo
-        //     .where({ _id: id })
-        //     .updateOne({
-        //         $set: {
-        //             likes: likes
-        //         },
-        //         $push: {
-        //             comments: comments
-        //         }
-        //     })
-        //     .exec(function (err, result) {
-        //         if (err) return res.send(err);
-        //         res.redirect("/recipe");
-        //         console.log(`Successfully updated ${result.modifiedCount} record`);
-        //     });
+        RecipeInfo
+            .where({ _id: id })
+            .updateOne({
+                $set: {
+                    likes: parseInt(likes)
+                },
+                $push: {
+                    comments: comments
+                }
+            })
+            .exec(function (err, result) {
+                if (err) return res.send(err);
+                res.redirect("/recipe");
+                console.log(`Successfully updated ${result.modifiedCount} record`);
+            });
 });
 
 
