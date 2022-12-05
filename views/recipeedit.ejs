@@ -65,15 +65,15 @@
 
     <script>
         window.addEventListener("DOMContentLoaded", domLoaded);
-
-        let LikesElement = document.getElementById("likes");
         function domLoaded() {
-            function updateLikes() {
-                LikesElement.innerText = parseInt(LikesElement.innerText) + 1;
+
+
+            likeElement = document.getElementById("like-num");
+            function likeForm(event) {
+                likeElement.innerText = parseInt(likeElement.innerText) + 1;
+                document.getElementById("likes").value = likeElement.innerText;
             }
-
-            document.getElementById("likes-btn").addEventListener("click", updateLikes);
-
+            document.getElementById("like-btn").addEventListener('click', likeForm)
         }
     </script>
 
@@ -90,9 +90,13 @@
     
         <div class="user-ratings" id="user-ratings">
 
-            <label>Like
-                <input type="radio" value="1" id="likes" name="likes">
-            </label>
+            Number of Likes
+            <p id="like-num">
+                <%= response.likes %>
+            </p>
+            <input type="button" value="Likes" id="like-btn">
+            <input type="text" value="" id="likes" name="likes" readonly>
+
 
             <div id="comment">
                 <label>Comment
@@ -100,11 +104,6 @@
                 </label>
             </div>
 
-            <div id="photo-upload">
-                <label>Upload Photo
-                    <input type="text" id="upload-photo" name="upload-photo" placeholder="url">
-                </label>
-            </div>
         </div>
 
         <button type="submit">Post Content</button>

@@ -15,8 +15,11 @@
   "dependencies": {
     "ejs": "^3.1.8",
     "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "mongo-sanitize": "^1.1.0",
     "mongodb": "^4.12.1",
-    "mongoose": "^6.7.3"
+    "mongoose": "^6.7.3",
+    "validatorjs": "^3.22.1"
   },
   "bugs": {
     "url": "https://github.com/GUWebDevelopment/cpsc-332-web-development-final-project-jackieaiko/issues"

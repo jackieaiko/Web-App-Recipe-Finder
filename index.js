@@ -2,6 +2,16 @@ const express = require("express");
 const app = express();
 
 
+const sanitize = require("mongo-sanitize");
+const Validator = require("validatorjs"); 
+
+
+var rules = {
+    firstName: "required",
+    lastName: "required"
+};
+
+
 app.use(express.urlencoded({
     extended: true
 }));
@@ -39,19 +49,35 @@ app.post("/profilecreated", (req, res) => {
         {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            backgroundColor: "white",
-            savedRecipes: []
         });
 
-    result.save(
-        (err, result) => {
-            if (err) {
-                //note that we are not handling this error! You'll want to do this yourself!
-                return console.log("Error: " + err);
-            }
-            console.log(`Success! Inserted data with _id: ${result._id} into the database.`);
-            res.redirect("/profilecreated");
-        });
+        let validation = new Validator(result, rules);
+        console.log("Validation Passes: " + validation.passes() + " Validation Fails: " + validation.fails());
+
+
+        // do not want two of the same profiles, if fails, then a unique name can be inserted
+        if(validation.passes()) {
+            let errorsList = {
+                firstName: validation.errors.first("firstName"),
+                lastName: validation.errors.first("lastName")
+            };
+
+            res.render("error.ejs", {
+                errors: 3,
+                errorsList: errorsList
+            });
+        }
+        else {
+            result.save(
+                (err, result) => {
+                    if (err) {
+                        //note that we are not handling this error! You'll want to do this yourself!
+                        return console.log("Error: " + err);
+                    }
+                    console.log(`Success! Inserted data with _id: ${result._id} into the database.`);
+                    res.redirect("/profilecreated");
+                });
+        }
 });
 
 app.get("/profilecreated", (req, res) => {
@@ -93,11 +119,17 @@ app.route("/editprofile/:_id")
 
     })
 
+    // validate and sanitize when editing profile information
     .post(function (req, res) { 
         console.log("posted")
         let id = req.params._id;
         let backgroundColor = req.body.backgroundColor;
         let savedRecipes = req.body.savedRecipes;
+
+        // validating the correct profile
+        validateSession(req.params._id, res);
+
+        id = sanitize(id);
 
         ProfileInfo
             .where({ _id: id })
@@ -120,20 +152,15 @@ app.route("/editprofile/:_id")
 
 
 
-
-
-
-
-
-
 // go to recipe
 app.post("/recipe", (req, res) => {
 
-    console.log(req.body.recipeName)
+    console.log(req.body.recipeurl)
     //Using the static model method to query the database
     RecipeInfo.find(
-        {"recipeName": req.body.recipeName},
+        {"recipeurl": req.body.recipeurl},
         (err, results) => {
+
             console.log(results)
             res.render("recipe.ejs/", {
                 recipeResults: results
@@ -147,7 +174,7 @@ app.get("/recipe", (req, res) => {
 
     //Using the static model method to query the database
     RecipeInfo.find(
-        {"recipeName": req.body.recipeName},
+        {"recipeurl": req.body.recipeurl},
         (err, results) => {
             console.log(results)
             res.render("recipe.ejs/", {
@@ -187,23 +214,52 @@ app.route("/recipeedit/:_id")
         let comments = req.body.comments;
 
         console.log(likes)
+        console.log(comments)
 
-        RecipeInfo
-            .where({ _id: id })
-            .updateOne({
-                $set: {
-                    likes: parseInt(likes)
-                },
-                $push: {
-                    comments: comments
-                }
-            })
-            .exec(function (err, result) {
-                if (err) return res.send(err);
-                res.redirect("/recipe");
-                console.log(`Successfully updated ${result.modifiedCount} record`);
-            });
+        // RecipeInfo
+        //     .where({ _id: id })
+        //     .updateOne({
+        //         $set: {
+        //             likes: likes
+        //         },
+        //         $push: {
+        //             comments: comments
+        //         }
+        //     })
+        //     .exec(function (err, result) {
+        //         if (err) return res.send(err);
+        //         res.redirect("/recipe");
+        //         console.log(`Successfully updated ${result.modifiedCount} record`);
+        //     });
 });
 
 
 
+
+function validateSession(_id, res) {
+    if (_id != "" && _id != undefined) {
+        //authenticate
+        ProfileInfo.findOne({
+            _id: _id
+        }).exec(function (err, user) {
+            if (err) {
+                return res.render("error.ejs", {
+                    errors: 2
+                });
+            } else if (!user) {
+                var err = new Error('User not found.');
+                err.status = 401;
+                //error
+                return res.render("error.ejs", {
+                    errors: 2
+                });
+            }
+            //if authenticated give access 
+            return;
+        });
+
+    } else {
+        //redirect to log in
+        return res.redirect("/login");
+    }
+};

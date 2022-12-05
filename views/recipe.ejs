@@ -67,26 +67,12 @@
 
         window.addEventListener("DOMContentLoaded", domLoaded);
         function domLoaded() {
-            let recipeNum = parseInt(localStorage.getItem("recipeNum"));
 
-            let RecipeNameElement = document.getElementById("recipe-name");
-            let DescriptionNameElement = document.getElementById("description");
-
-            let IngredientsElement = document.getElementById("ingredients");
-
-            let LikesElement = document.getElementById("likes");
-            let CommentElement = document.getElementById("comments");
-            let CommentInputElement = document.getElementById("comment");
-            let PhotoInputElement = document.getElementById("upload-photo");
-
-            RecipeNameElement.innerHTML = recipes[recipeNum].recipeName;
-            DescriptionNameElement.innerHTML = recipes[recipeNum].decription;
-
-            function updateLikes() {
-                LikesElement.innerText = parseInt(LikesElement.innerText) + 1;
+            likeElement = document.getElementById("likes");
+            function likeForm(event) {
+                likeElement.innerText = parseInt(likeElement.innerText) + 1;
             }
-            document.getElementById("like-btn").addEventListener("click", updateLikes);
-
+            document.getElementById("like-btn").addEventListener('click', likeForm)
         }
 
     </script>
@@ -139,11 +125,14 @@
             
             <button id="recipe-edit"><a href="/recipeedit/<%= response._id %>">Click to rate or post!</a></button>
 
-            <h4>Likes</h4>
-            <u id="likes">
-                <%= response.likes %>
-            </u>
-            
+            <div>
+                <h4>Likes</h4>
+                <p id="likes">
+                    <%= response.likes %>
+                </p>
+                <input type="button" value="Like" id="like-btn">
+            </div>
+
             <h4>Comments</h4>
             <div id="comment">
                 <% response.comments.forEach((comment)=>{%>

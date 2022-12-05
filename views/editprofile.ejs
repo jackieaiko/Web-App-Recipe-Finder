@@ -51,7 +51,7 @@
 
 <body>
     <div class="title">
-        <h1>Your Profile</h1>
+        <h1>Edit Profile</h1>
     </div>
 
     <% //debugger; %>
@@ -61,6 +61,7 @@
         <div class="profile-background">
             <label>Background Color:
                 <select name="backgroundColor" id="backgroundColor">
+                    <option value="<%= response.backgroundColor %>">Default Color</option>
                     <option value="blue">Blue</option>
                     <option value="green">Green</option>
                     <option value="yellow">Yellow</option>
@@ -72,7 +73,7 @@
 
         <div class="saved-recipes">
             <h2>Saved Recipes</h2>
-            <select name="savedRecipes" id="savedRecipes">
+            <select name="savedRecipes" id="savedRecipes" >
                 <option value="Pork Bun">Pork Bun</option>
                 <option value="Fried Rice">Fried Rice</option>
                 <option value="Birria Tacos">Birria Tacos</option>

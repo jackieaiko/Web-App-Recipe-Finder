@@ -17,9 +17,15 @@
             padding: 5px;
         }
 
+        #profile-edit {
+            position: relative;
+            left: 760px;
+        }
+
         .user-name {
             background-color: rgb(211, 242, 249);
             max-width: 930px;
+            font-size: 25px;
             padding: 5px;
         }
 
@@ -63,25 +69,27 @@
 
 <body>
     
-    <div class="title">
-        <h1>Your Created Profile</h1>
-    </div>
-
-    
     <% formResults.forEach(function(response) { //debugger; %>
+
+        <div class="title">
+            <h1>Your Profile</h1>
+            <button id="profile-edit"><a href="/editprofile/<%= response._id %>">Click to Edit Profile</a></button>
+        </div>
+
         <div class="user-name">
             <label>First Name:
-                <p id="firstName"><%= response.firstName %></p>
+                <u id="firstName"><%= response.firstName %></u>
             </label> 
         
             <p></p>
 
             <label>Last Name:
-                <p id="lastName"><%= response.lastName %></p>
+                <u id="lastName"><%= response.lastName %></u>
             </label>
+
+            
         </div>
 
-        <button id="profile-edit"><a href="/editprofile/<%= response._id %>">Click to Edit Profile</a></button>
 
         <div class="profile-background">
             <h2>Background Color</h2>
@@ -94,20 +102,6 @@
 
     <div class="saved-recipes">
         <h2>Saved Recipes</h2>
-        <select name="recipe-options" id="recipes">
-            <option value="Pork Bun">Pork Bun</option>
-            <option value="Fried Rice">Fried Rice</option>
-            <option value="Birria Tacos">Birria Tacos</option>
-            <option value="Sushi Roll">Sushi Roll</option>
-            <option value="Shwarma">Shwarma</option>
-            <option value="Shwarma Fries">Shwarma Fries</option>
-            <option value="Crepe">Crepe</option>
-            <option value="Pork Rib">Pork Rib</option>
-            <option value="Pho">Pho</option>
-            <option value="Saimen">Saimen</option>
-            <option value="Chicken Sandwich">Chicken Sandwich</option>
-            <option value="Breakfast Sandwich">Breakfast Sandwich</option>
-        </select>
 
         <p id="savedRecipes" name="savedRecipes">
             <ul id="list">
