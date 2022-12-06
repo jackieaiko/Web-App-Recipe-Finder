@@ -17,8 +17,8 @@ They can also create a profile where favorite recipes are stored. Recipe pages c
 npm install express  
 npm install mongodb  
 npm install mongoose  
-npm install validate
-npm install sanitize
+npm install validate  
+npm install sanitize  
 
 run "node index.js"  
 open in browser "http://localhost:8080/home"  
