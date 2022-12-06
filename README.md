@@ -14,12 +14,12 @@ They can also create a profile where favorite recipes are stored. Recipe pages c
 * Licensing
 
 ### Installation
-install npm express
-install npm mongodb
-install npm mongoose
+install npm express  
+install npm mongodb  
+install npm mongoose  
 
-run "node index.js"
-open in browser "http://localhost:8080/home"
+run "node index.js"  
+open in browser "http://localhost:8080/home"  
 
 ### Usage
 To navigate through and use this website, refer to WP4 for interacting with the functional
