@@ -106,7 +106,9 @@
         <p id="savedRecipes" name="savedRecipes">
             <ul id="list">
                 <% response.savedRecipes.forEach((recipe)=>{%>
-                    <li><%=recipe%></li> 
+                    <form action="/recipe" method="post">
+                        <button type="submit" name="recipeurl" value="<%=recipe%>"><img src="/<%=recipe%>" alt="<%=recipe%>"></button>
+                    </form>
                 <%});%>
             </ul>
         </p>
