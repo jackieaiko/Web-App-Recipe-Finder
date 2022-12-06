@@ -2,7 +2,7 @@
 
 ### Description:
 This project is a recipe website called Jackie's Snackies. Users can explore and search for recipes they are interested in.
-They can also create a profile where favorite recipes are stored. Recipe pages can be liked, commented, and photos can be uploaded.
+They can also create a profile where favorite recipes are stored. Recipe pages can be liked and commented.
 
 ### Table of Contents:
 * Project Name
@@ -14,18 +14,23 @@ They can also create a profile where favorite recipes are stored. Recipe pages c
 * Licensing
 
 ### Installation
-This project is currently in the process of being built. Right now, to view this, you can us VS code preview.
+install npm express
+install npm mongodb
+install npm mongoose
+
+run "node index.js"
+open in browser "http://localhost:8080/home"
 
 ### Usage
-To navigate through and use this website, refer to WP2 for interacting with the functional
+To navigate through and use this website, refer to WP4 for interacting with the functional
 features of the website.
 
 ### Contributing
 Author: Jackie Ramsey
 
 ### Credits
-Currently NA
+NA
 
 ### License
-Using MongoDB, ExpressJS, ReactJS, NodeJS
+Using MongoDB, ExpressJS, NodeJS
 Icensing currently NA
