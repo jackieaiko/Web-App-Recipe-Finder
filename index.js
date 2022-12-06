@@ -155,19 +155,42 @@ app.route("/editprofile/:_id")
 // go to recipe
 app.post("/recipe", (req, res) => {
 
-    console.log(req.body.recipeurl)
-    //Using the static model method to query the database
-    RecipeInfo.find(
-        {"recipeurl": req.body.recipeurl},
-        (err, results) => {
+    // console.log(req.body.recipeurl)
+    // console.log(req.body.recipeName)
 
-            console.log(results)
-            res.render("recipe.ejs/", {
-                recipeResults: results
+    if(req.body.recipeName) {
+        console.log(req.body.recipeName)
+
+        RecipeInfo.find(
+            {"recipeName": req.body.recipeName},
+            (err, results) => {
+    
+                console.log(results)
+                res.render("recipe.ejs/", {
+                    recipeResults: results
+                });
+    
             });
+    }
+    else if(req.body.recipeurl) {
+        console.log(req.body.recipeurl)
 
-        });
+        RecipeInfo.find(
+            {"recipeurl": req.body.recipeurl},
+            (err, results) => {
+    
+                console.log(results)
+                res.render("recipe.ejs/", {
+                    recipeResults: results
+                });
+    
+            });
+    }
+
+
+
 });
+
 
 
 app.get("/recipe", (req, res) => {

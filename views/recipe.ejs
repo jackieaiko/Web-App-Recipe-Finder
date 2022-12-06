@@ -68,11 +68,6 @@
         window.addEventListener("DOMContentLoaded", domLoaded);
         function domLoaded() {
 
-            likeElement = document.getElementById("likes");
-            function likeForm(event) {
-                likeElement.innerText = parseInt(likeElement.innerText) + 1;
-            }
-            document.getElementById("like-btn").addEventListener('click', likeForm)
         }
 
     </script>
@@ -130,7 +125,7 @@
                 <p id="likes">
                     <%= response.likes %>
                 </p>
-                <input type="button" value="Like" id="like-btn">
+                
             </div>
 
             <h4>Comments</h4>
@@ -138,10 +133,6 @@
                 <% response.comments.forEach((comment)=>{%>
                     <li><%=comment%></li> 
                 <%});%>
-            </div>
-
-            <div id="photo-upload">
-                <h4>Uploaded Photos</h4>
             </div>
 
 
